@@ -1,6 +1,6 @@
 "use client"
 
-import { Scale } from "@/components/Scale."
+import { Scale } from "@/components/Scale"
 import { Sidebar } from "@/components/Sidebar"
 import { Toolbar } from "@/components/Toolbar"
 import { Game } from "@/render/Game"
