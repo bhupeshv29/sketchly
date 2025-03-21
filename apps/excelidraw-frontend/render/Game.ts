@@ -40,9 +40,9 @@ export class Game {
 
     private canvas: HTMLCanvasElement
     private ctx: CanvasRenderingContext2D
-    private roomId: string
-    private socket: WebSocket
-    private existingShape: Shape[]
+    protected roomId: string
+    protected socket: WebSocket
+    protected existingShape: Shape[]
     private clicked: boolean
     private room: any
     private activeTool: Tool = "grab"
@@ -88,9 +88,25 @@ export class Game {
             const shapes = JSON.parse(shape.data)
             this.existingShape.push(shapes.shape)
         })
-        console.log(this.existingShape)
+        // console.log(this.existingShape)
         this.clearCanvas()
     }
+
+
+    //Ai
+    public addShape(shape: Shape): void {
+        this.existingShape.push(shape);
+        this.clearCanvas();
+      }
+
+      public getSocket(): WebSocket {
+        return this.socket;
+      }
+    
+      public getRoomId(): string {
+        return this.roomId;
+      }
+    
 
     initHandler(){
         this.socket.onmessage = (event) =>{

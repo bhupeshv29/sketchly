@@ -1,5 +1,6 @@
 "use client"
 
+import { AIGenerateButton } from "@/components/AIGenerateButton"
 import { Scale } from "@/components/Scale"
 import { Sidebar } from "@/components/Sidebar"
 import { Toolbar } from "@/components/Toolbar"
@@ -69,18 +70,19 @@ export const Canvas = ({roomId, socket , room}: CanvasProps) => {
 
     return(
         <div className="w-full h-screen">
-
         <Toolbar activeTool={activeTool} setActiveTool={setActiveTool} />
-        <Sidebar activeTool={activeTool} 
-        strokeFill={strokeFill} 
-        setStrokeFill={setStrokeFill} 
-        strokeWidth={strokeWidth} 
-        setStrokeWidth={setStrokeWidth} 
-        bgFill={bgFill} 
-        setBgFill={setBgFill} />
+        <Sidebar 
+          activeTool={activeTool} 
+          strokeFill={strokeFill} 
+          setStrokeFill={setStrokeFill} 
+          strokeWidth={strokeWidth} 
+          setStrokeWidth={setStrokeWidth} 
+          bgFill={bgFill} 
+          setBgFill={setBgFill} 
+        />
+        <AIGenerateButton game={game} />
         <Scale scale={scale} />
-            <canvas ref={canvasRef} />
-
-        </div>
+        <canvas ref={canvasRef} />
+      </div>
     )
 }
