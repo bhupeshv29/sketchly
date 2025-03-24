@@ -57,7 +57,7 @@ export function CreateRoomForm() {
       if (responseData.error) {
         setError(responseData.error);
       } else {
-        console.log(responseData);
+        // console.log(responseData);
         setSuccessRoom(values.roomName); 
       }
     } catch (err) {

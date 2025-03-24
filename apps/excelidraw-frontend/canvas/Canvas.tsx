@@ -57,7 +57,7 @@ export const Canvas = ({roomId, socket , room}: CanvasProps) => {
             }
         }
 
-    }, [canvasRef])
+    }, [canvasRef,room,roomId,socket])
 
 
     useEffect(()=>{

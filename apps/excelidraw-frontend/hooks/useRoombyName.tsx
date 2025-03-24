@@ -29,7 +29,7 @@ export const useRoomByName = (roomName: string) => {
                 }
 
                 const data : Room = await response.json()
-                console.log(data)
+                // console.log(data)
                 setRoom(data)
 
             }
@@ -39,7 +39,7 @@ export const useRoomByName = (roomName: string) => {
         }
 
         fetchRoom()
-    }, [])
+    }, [roomName])
 
     return room
 }

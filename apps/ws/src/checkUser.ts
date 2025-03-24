@@ -1,11 +1,11 @@
-import { JWT_SECRET } from "@repo/backend-common/config"
 import jwt from "jsonwebtoken"
 import "dotenv/config"
+
 
 export const  checkUser = (token: string) : string | null => {
     
 
-    const decoded = jwt.verify(token ,JWT_SECRET! || "123123") as {userId :string}
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || "23123") as { userId: string }
  
     
     

@@ -1,21 +1,23 @@
-
 "use client"
 
 import { Game } from "@/render/Game";
 import { useState } from "react";
+import { useSocket } from "@/hooks/useSocket"; // Adjust the path if necessary
 
 export const AIGenerateButton = ({ game }: { game?: Game }) => {
   const [prompt, setPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
+  const socket = useSocket(game?.getRoomId() || null);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!prompt.trim() || !game) return;
-  
+
     setIsLoading(true);
     setError("");
-  
+
     try {
       const response = await fetch(`http://localhost:3001/generate`, {
         method: "POST",
@@ -24,19 +26,25 @@ export const AIGenerateButton = ({ game }: { game?: Game }) => {
         },
         body: JSON.stringify({ prompt }),
       });
-  
+
       if (!response.ok) throw new Error("Generation failed");
-  
+
       const shape = await response.json();
       
       game.addShape(shape);
-      
-      game.getSocket().send(JSON.stringify({
-        type: "draw",
-        data: JSON.stringify({ shape }),
-        roomId: game.getRoomId()
-      }));
-  
+
+      if (socket && socket.readyState === WebSocket.OPEN) {
+        socket.send(
+          JSON.stringify({
+            type: "draw",
+            data: JSON.stringify({ shape }),
+            roomId: game.getRoomId(),
+          })
+        );
+      } else {
+        console.error("WebSocket is not open. Cannot send data.");
+      }
+
       setPrompt("");
     } catch (error) { 
       setError("Failed to generate shape. Please try again.");

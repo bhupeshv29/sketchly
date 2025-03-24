@@ -1,4 +1,6 @@
+import "dotenv/config"
 import { GoogleGenerativeAI } from "@google/generative-ai";
+
 
 const SYSTEM_PROMPT = `You are an AI illustration generator. Follow these rules STRICTLY:
 1. Respond ONLY with raw JSON between curly braces
